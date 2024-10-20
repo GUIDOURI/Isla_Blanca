@@ -11,12 +11,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Isla Blanca App',
+      debugShowCheckedModeBanner: false, // Quita el banner de DEBUG
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreen(),  // Primero mostramos la pantalla de login
+      home: LoginScreen(),
       routes: {
-        '/home': (context) => HomeScreen(),  // Ruta para la pantalla de Home
+        '/home': (context) => HomeScreen(),
       },
     );
   }
