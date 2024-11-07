@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'screens/login_screen.dart';
 import 'screens/menu_screen.dart';
+import 'screens/map_screen.dart'; // Importa la nueva pantalla del mapa
 
 void main() {
   runApp(MyApp());
@@ -17,9 +18,9 @@ class MyApp extends StatelessWidget {
       ),
       home: LoginScreen(),
       routes: {
-        '/menu': (context) => MainInterface(), // Agrega la ruta para el menú
+        '/menu': (context) => MainInterface(),
+        '/map': (context) => MapScreen(), // Nueva ruta para la pantalla del mapa
       },
     );
   }
 }
-
