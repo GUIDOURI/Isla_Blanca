@@ -22,21 +22,10 @@ class LoginScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Text(
-                        'INICIO DE SESIÓN',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 32,
-                          fontWeight: FontWeight.w900,
-                          color: Colors.black,
-                          fontFamily: 'Roboto',
-                          letterSpacing: 2.0,
-                        ),
-                      ),
                       SizedBox(height: 30),
                       Image.asset(
                         'assets/logo.png',
-                        height: 100,
+                        height: 200,
                       ),
                       SizedBox(height: 40),
                       _buildInputField('CORREO ELECTRÓNICO', 'herbascaceres@gmail.com', Icons.email),
@@ -45,7 +34,7 @@ class LoginScreen extends StatelessWidget {
                       SizedBox(height: 30),
                       _buildGradientButton(
                         onPressed: () {
-                          Navigator.pushReplacementNamed(context, '/home');
+                          Navigator.pushReplacementNamed(context, '/menu'); // Cambia a la ruta del menú
                         },
                         child: Text(
                           'INICIAR SESIÓN',
@@ -53,7 +42,7 @@ class LoginScreen extends StatelessWidget {
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                             letterSpacing: 1.8,
-                            color: Colors.black, // Cambiado a negro
+                            color: Colors.black,
                           ),
                         ),
                       ),
@@ -128,7 +117,7 @@ class LoginScreen extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
-          foregroundColor: Colors.black, // Asegura que el texto sea negro
+          foregroundColor: Colors.black,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         ),
       ),
