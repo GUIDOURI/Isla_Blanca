@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import 'web_map_screen.dart'; // Asegúrate de importar WebMapScreen aquí
 
-class MainInterface extends StatelessWidget {
+class MainInterface extends StatefulWidget {
   const MainInterface({Key? key}) : super(key: key);
+
+  @override
+  _MainInterfaceState createState() => _MainInterfaceState();
+}
+
+class _MainInterfaceState extends State<MainInterface> {
+  Widget _currentScreen = Container(); // Comienza vacío o con un widget de bienvenida
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +27,10 @@ class MainInterface extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Left side - Logo and buttons
                 Expanded(
                   flex: 1,
                   child: Column(
                     children: [
-                      // Centered logo with padding adjustments
                       Padding(
                         padding: const EdgeInsets.symmetric(
                           vertical: 5.0,
@@ -37,7 +43,6 @@ class MainInterface extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 15),
-                      // Buttons Container
                       Container(
                         decoration: BoxDecoration(
                           border: Border.all(
@@ -49,11 +54,12 @@ class MainInterface extends StatelessWidget {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            // Botón "SEGUIR VEHÍCULO" con navegación al mapa
                             _buildButton(
                               'SEGUIR VEHÍCULO',
                               onTap: () {
-                                Navigator.pushNamed(context, '/map');
+                                setState(() {
+                                  _currentScreen = WebMapScreen(); // Cambia la pantalla al mapa web
+                                });
                               },
                             ),
                             _buildDivider(),
@@ -81,7 +87,6 @@ class MainInterface extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 16),
-                // Right side - Large content container
                 Expanded(
                   flex: 3,
                   child: Container(
@@ -96,13 +101,17 @@ class MainInterface extends StatelessWidget {
                     ),
                     child: Stack(
                       children: [
-                        // Close button
+                        Positioned.fill(
+                          child: _currentScreen,
+                        ),
                         Positioned(
                           right: 8,
                           top: 8,
                           child: GestureDetector(
                             onTap: () {
-                              Navigator.pop(context); // Vuelve a la pantalla anterior
+                              setState(() {
+                                _currentScreen = Container(); // Vuelve a dejar el contenedor vacío
+                              });
                             },
                             child: Image.asset(
                               'assets/cerrar.png',
@@ -111,7 +120,6 @@ class MainInterface extends StatelessWidget {
                             ),
                           ),
                         ),
-                        // Aquí podrías agregar contenido adicional para la interfaz principal
                       ],
                     ),
                   ),
@@ -124,12 +132,11 @@ class MainInterface extends StatelessWidget {
     );
   }
 
-  // Método para construir los botones
   Widget _buildButton(String text, {bool isLogout = false, VoidCallback? onTap}) {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        onTap: onTap, // Funcionalidad de navegación del botón
+        onTap: onTap,
         child: Container(
           width: double.infinity,
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
@@ -148,7 +155,6 @@ class MainInterface extends StatelessWidget {
     );
   }
 
-  // Método para construir divisores entre botones
   Widget _buildDivider() {
     return const Divider(
       height: 1,
