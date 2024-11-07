@@ -24,19 +24,19 @@ class MainInterface extends StatelessWidget {
                   flex: 1,
                   child: Column(
                     children: [
-                      // Even bigger centered logo with adjusted padding
+                      // Centered logo with padding adjustments
                       Padding(
                         padding: const EdgeInsets.symmetric(
-                          vertical: 5.0,  // Reduced vertical padding
-                          horizontal: 15.0,  // Slightly reduced horizontal padding
+                          vertical: 5.0,
+                          horizontal: 15.0,
                         ),
                         child: Image.asset(
                           'assets/logo.png',
-                          height: 100,  // Increased from 80 to 100
+                          height: 100,
                           fit: BoxFit.contain,
                         ),
                       ),
-                      const SizedBox(height: 15),  // Slightly reduced spacing
+                      const SizedBox(height: 15),
                       // Buttons Container
                       Container(
                         decoration: BoxDecoration(
@@ -49,7 +49,13 @@ class MainInterface extends StatelessWidget {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            _buildButton('SEGUIR VEHÍCULO'),
+                            // Botón "SEGUIR VEHÍCULO" con navegación al mapa
+                            _buildButton(
+                              'SEGUIR VEHÍCULO',
+                              onTap: () {
+                                Navigator.pushNamed(context, '/map');
+                              },
+                            ),
                             _buildDivider(),
                             _buildButton('REGISTRO DE\nINVENTARIO VEHICULAR'),
                             _buildDivider(),
@@ -61,7 +67,13 @@ class MainInterface extends StatelessWidget {
                             _buildDivider(),
                             _buildButton('INFORME'),
                             _buildDivider(),
-                            _buildButton('CERRAR SESIÓN', isLogout: true),
+                            _buildButton(
+                              'CERRAR SESIÓN',
+                              isLogout: true,
+                              onTap: () {
+                                Navigator.pushReplacementNamed(context, '/login');
+                              },
+                            ),
                           ],
                         ),
                       ),
@@ -90,7 +102,7 @@ class MainInterface extends StatelessWidget {
                           top: 8,
                           child: GestureDetector(
                             onTap: () {
-                              // Add close functionality
+                              Navigator.pop(context); // Vuelve a la pantalla anterior
                             },
                             child: Image.asset(
                               'assets/cerrar.png',
@@ -99,6 +111,7 @@ class MainInterface extends StatelessWidget {
                             ),
                           ),
                         ),
+                        // Aquí podrías agregar contenido adicional para la interfaz principal
                       ],
                     ),
                   ),
@@ -111,13 +124,12 @@ class MainInterface extends StatelessWidget {
     );
   }
 
-  Widget _buildButton(String text, {bool isLogout = false}) {
+  // Método para construir los botones
+  Widget _buildButton(String text, {bool isLogout = false, VoidCallback? onTap}) {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        onTap: () {
-          // Add button functionality
-        },
+        onTap: onTap, // Funcionalidad de navegación del botón
         child: Container(
           width: double.infinity,
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
@@ -136,6 +148,7 @@ class MainInterface extends StatelessWidget {
     );
   }
 
+  // Método para construir divisores entre botones
   Widget _buildDivider() {
     return const Divider(
       height: 1,
