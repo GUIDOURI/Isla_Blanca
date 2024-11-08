@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'web_map_screen.dart'; // Asegúrate de importar WebMapScreen aquí
+import 'web_map_screen.dart'; // Importa WebMapScreen aquí
 
 class MainInterface extends StatefulWidget {
   const MainInterface({Key? key}) : super(key: key);
@@ -110,7 +110,7 @@ class _MainInterfaceState extends State<MainInterface> {
                           child: GestureDetector(
                             onTap: () {
                               setState(() {
-                                _currentScreen = Container(); // Vuelve a dejar el contenedor vacío
+                                _currentScreen = Container(); // Limpia el contenedor derecho
                               });
                             },
                             child: Image.asset(

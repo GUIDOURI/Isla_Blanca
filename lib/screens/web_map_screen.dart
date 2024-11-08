@@ -1,57 +1,91 @@
-import 'dart:html' as html;
 import 'package:flutter/material.dart';
-import 'dart:ui' as ui;
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
 
 class WebMapScreen extends StatefulWidget {
   @override
-  _WebMapScreenState createState() => _WebMapScreenState();
+  _MapScreenState createState() => _MapScreenState();
 }
 
-class _WebMapScreenState extends State<WebMapScreen> {
+class _MapScreenState extends State<WebMapScreen> {
+  late GoogleMapController mapController;
+  LocationData? currentLocation;
+  Location location = Location();
+
   @override
   void initState() {
     super.initState();
-    _initializeMap();
+    _getUserLocation();
   }
 
-  void _initializeMap() {
-    // Registrar un id único para el contenedor HTML que contendrá el mapa
-    // Evita errores en la versión actual de Flutter al verificar si `platformViewRegistry` existe
-    if (const bool.fromEnvironment('dart.library.js_util', defaultValue: false)) {
-      // Registra un contenedor para el mapa en Flutter Web
-      ui.platformViewRegistry.registerViewFactory('map-element', (int viewId) {
-        final mapContainer = html.DivElement()
-          ..id = 'map'
-          ..style.width = '100%'
-          ..style.height = '100%';
+  Future<void> _getUserLocation() async {
+    bool serviceEnabled;
+    PermissionStatus permissionGranted;
 
-        final script = html.ScriptElement()
-          ..type = 'text/javascript'
-          ..innerHtml = '''
-            function initialize() {
-              const mapOptions = {
-                zoom: 14,
-                center: { lat: -17.3915, lng: -66.1592 },
-              };
-              const map = new google.maps.Map(document.getElementById('map'), mapOptions);
-            }
-            if (typeof google !== 'undefined') {
-              initialize();
-            } else {
-              console.error('Google Maps API no se ha cargado.');
-            }
-          ''';
+    // Verificar si el servicio de ubicación está habilitado
+    serviceEnabled = await location.serviceEnabled();
+    if (!serviceEnabled) {
+      serviceEnabled = await location.requestService();
+      if (!serviceEnabled) return;
+    }
 
-        html.document.body!.append(script);
-        return mapContainer;
-      });
+    // Verificar permisos de ubicación
+    permissionGranted = await location.hasPermission();
+    if (permissionGranted == PermissionStatus.denied) {
+      permissionGranted = await location.requestPermission();
+      if (permissionGranted != PermissionStatus.granted) return;
+    }
+
+    // Obtener ubicación actual
+    currentLocation = await location.getLocation();
+    setState(() {});
+
+    // Centrar la cámara en la ubicación actual
+    if (mapController != null && currentLocation != null) {
+      mapController.animateCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(
+            target: LatLng(currentLocation!.latitude!, currentLocation!.longitude!),
+            zoom: 15,
+          ),
+        ),
+      );
+    }
+  }
+
+  void _onMapCreated(GoogleMapController controller) {
+    mapController = controller;
+
+    // Centrar en la ubicación actual si está disponible
+    if (currentLocation != null) {
+      mapController.animateCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(
+            target: LatLng(currentLocation!.latitude!, currentLocation!.longitude!),
+            zoom: 15,
+          ),
+        ),
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: const HtmlElementView(viewType: 'map-element'), // Mostrar el mapa en el contenedor HTML
+      appBar: AppBar(
+        title: Text("Seguir Vehículo"),
+      ),
+      body: currentLocation == null
+          ? Center(child: CircularProgressIndicator())
+          : GoogleMap(
+        onMapCreated: _onMapCreated,
+        initialCameraPosition: CameraPosition(
+          target: LatLng(currentLocation!.latitude!, currentLocation!.longitude!),
+          zoom: 15,
+        ),
+        myLocationEnabled: true,
+        myLocationButtonEnabled: true,
+      ),
     );
   }
 }
