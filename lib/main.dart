@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'screens/login_screen.dart';
 import 'screens/menu_screen.dart';
 import 'screens/web_map_screen.dart'; // Importa la nueva pantalla del mapa
+import 'screens/inventory_screen.dart'; // Importa la pantalla de inventario
 
 void main() {
   runApp(MyApp());
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/menu': (context) => MainInterface(),
         '/map': (context) => WebMapScreen(), // Nueva ruta para la pantalla del mapa
+        '/inventory': (context) => InventoryScreen(), // Ruta para la pantalla de inventario
       },
     );
   }

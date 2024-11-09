@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'web_map_screen.dart'; // Importa WebMapScreen aquí
+import 'web_map_screen.dart'; // Importa la pantalla del mapa
+import 'inventory_screen.dart'; // Importa la pantalla del inventario
 
 class MainInterface extends StatefulWidget {
   const MainInterface({Key? key}) : super(key: key);
@@ -63,7 +64,14 @@ class _MainInterfaceState extends State<MainInterface> {
                               },
                             ),
                             _buildDivider(),
-                            _buildButton('REGISTRO DE\nINVENTARIO VEHICULAR'),
+                            _buildButton(
+                              'REGISTRO DE\nINVENTARIO VEHICULAR',
+                              onTap: () {
+                                setState(() {
+                                  _currentScreen = InventoryScreen(); // Cambia a la pantalla de inventario
+                                });
+                              },
+                            ),
                             _buildDivider(),
                             _buildButton('PLANIFICAR RUTAS'),
                             _buildDivider(),
