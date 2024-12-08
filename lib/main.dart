@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:isla_blanca/screens/informe_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/menu_screen.dart'; // Menú principal
 import 'screens/web_map_screen.dart'; // Pantalla de mapa
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         '/inventory': (context) => InventoryScreen(), // Ruta al inventario
         '/messages_alerts': (context) => const MessagesAlertsScreen(), // Ruta a mensajes y alertas
         '/driverSales': (context) => DriverSalesScreen(), // Ruta a ventas del chofer
+        '/informe': (context) => InformeScreen(), // Ruta al informe
       },
     );
   }

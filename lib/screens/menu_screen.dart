@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'web_map_screen.dart'; // Importa la pantalla del mapa
 import 'inventory_screen.dart'; // Importa la pantalla del inventario
 import 'messages_alerts_screen.dart'; // Importa la pantalla de mensajes y alertas
+import 'informe_screen.dart'; // Importa la pantalla de informe
 
 class MainInterface extends StatefulWidget {
   const MainInterface({Key? key}) : super(key: key);
@@ -87,7 +88,14 @@ class _MainInterfaceState extends State<MainInterface> {
                             _buildDivider(),
                             _buildButton('VER REGISTRO DE VENTAS'),
                             _buildDivider(),
-                            _buildButton('INFORME'),
+                            _buildButton(
+                              'INFORME',
+                              onTap: () {
+                                setState(() {
+                                  _currentScreen = InformeScreen(); // Abre la pantalla de informe
+                                });
+                              },
+                            ),
                             _buildDivider(),
                             _buildButton(
                               'CERRAR SESIÓN',
