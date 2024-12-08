@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'web_map_screen.dart'; // Importa la pantalla del mapa
 import 'inventory_screen.dart'; // Importa la pantalla del inventario
+<<<<<<< HEAD
 import 'messages_alerts_screen.dart'; // Importa la pantalla de mensajes y alertas
+=======
+>>>>>>> 3e0880f43603d3daaf178209080407ee660af9c1
 
 class MainInterface extends StatefulWidget {
   const MainInterface({Key? key}) : super(key: key);
@@ -11,7 +14,11 @@ class MainInterface extends StatefulWidget {
 }
 
 class _MainInterfaceState extends State<MainInterface> {
+<<<<<<< HEAD
   Widget _currentScreen = Container(); // Pantalla actual dentro del contenedor
+=======
+  Widget _currentScreen = Container(); // Comienza vacío o con un widget de bienvenida
+>>>>>>> 3e0880f43603d3daaf178209080407ee660af9c1
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +26,11 @@ class _MainInterfaceState extends State<MainInterface> {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
+<<<<<<< HEAD
             image: AssetImage('assets/fondo.png'), // Fondo
+=======
+            image: AssetImage('assets/fondo.png'),
+>>>>>>> 3e0880f43603d3daaf178209080407ee660af9c1
             fit: BoxFit.cover,
           ),
         ),
@@ -60,7 +71,11 @@ class _MainInterfaceState extends State<MainInterface> {
                               'SEGUIR VEHÍCULO',
                               onTap: () {
                                 setState(() {
+<<<<<<< HEAD
                                   _currentScreen = WebMapScreen();
+=======
+                                  _currentScreen = WebMapScreen(); // Cambia la pantalla al mapa web
+>>>>>>> 3e0880f43603d3daaf178209080407ee660af9c1
                                 });
                               },
                             ),
@@ -69,13 +84,18 @@ class _MainInterfaceState extends State<MainInterface> {
                               'REGISTRO DE\nINVENTARIO VEHICULAR',
                               onTap: () {
                                 setState(() {
+<<<<<<< HEAD
                                   _currentScreen = InventoryScreen();
+=======
+                                  _currentScreen = InventoryScreen(); // Cambia a la pantalla de inventario
+>>>>>>> 3e0880f43603d3daaf178209080407ee660af9c1
                                 });
                               },
                             ),
                             _buildDivider(),
                             _buildButton('PLANIFICAR RUTAS'),
                             _buildDivider(),
+<<<<<<< HEAD
                             _buildButton(
                               'MENSAJES Y ALERTAS',
                               onTap: () {
@@ -84,6 +104,9 @@ class _MainInterfaceState extends State<MainInterface> {
                                 });
                               },
                             ),
+=======
+                            _buildButton('MENSAJES Y ALERTAS'),
+>>>>>>> 3e0880f43603d3daaf178209080407ee660af9c1
                             _buildDivider(),
                             _buildButton('VER REGISTRO DE VENTAS'),
                             _buildDivider(),
@@ -126,7 +149,11 @@ class _MainInterfaceState extends State<MainInterface> {
                           child: GestureDetector(
                             onTap: () {
                               setState(() {
+<<<<<<< HEAD
                                 _currentScreen = Container(); // Limpia la pantalla
+=======
+                                _currentScreen = Container(); // Limpia el contenedor derecho
+>>>>>>> 3e0880f43603d3daaf178209080407ee660af9c1
                               });
                             },
                             child: Image.asset(
