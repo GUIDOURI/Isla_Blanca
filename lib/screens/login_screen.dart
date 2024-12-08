@@ -1,6 +1,32 @@
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  void _login() {
+    String username = _usernameController.text.trim();
+    String password = _passwordController.text.trim();
+
+    // Si los campos están vacíos, redirige al menú
+    if (username.isEmpty || password.isEmpty) {
+      Navigator.pushReplacementNamed(context, '/menu');
+    } else if (username == 'chofer' && password == '123') {
+      // Si el usuario y la contraseña son "chofer" y "123", redirige a la pantalla de ventas
+      Navigator.pushReplacementNamed(context, '/driverSales');
+    } else {
+      // Muestra un mensaje de error si las credenciales no coinciden
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Credenciales incorrectas')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,9 +59,7 @@ class LoginScreen extends StatelessWidget {
                       _buildInputField('CONTRASEÑA', 'Introduce aca la contraseña', Icons.lock, isPassword: true),
                       SizedBox(height: 30),
                       _buildGradientButton(
-                        onPressed: () {
-                          Navigator.pushReplacementNamed(context, '/menu'); // Cambia a la ruta del menú
-                        },
+                        onPressed: _login,
                         child: Text(
                           'INICIAR SESIÓN',
                           style: TextStyle(
@@ -77,6 +101,7 @@ class LoginScreen extends StatelessWidget {
             border: Border.all(color: Colors.black, width: 2),
           ),
           child: TextFormField(
+            controller: isPassword ? _passwordController : _usernameController,
             obscureText: isPassword,
             decoration: InputDecoration(
               hintText: hintText,

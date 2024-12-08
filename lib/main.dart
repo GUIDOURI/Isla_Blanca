@@ -4,6 +4,7 @@ import 'screens/menu_screen.dart'; // Menú principal
 import 'screens/web_map_screen.dart'; // Pantalla de mapa
 import 'screens/inventory_screen.dart'; // Pantalla de inventario
 import 'screens/messages_alerts_screen.dart'; // Pantalla de mensajes y alertas
+import 'screens/driver_sales_screen.dart'; // Pantalla de ventas del chofer
 
 void main() {
   runApp(MyApp());
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         '/map': (context) => WebMapScreen(), // Ruta al mapa
         '/inventory': (context) => InventoryScreen(), // Ruta al inventario
         '/messages_alerts': (context) => const MessagesAlertsScreen(), // Ruta a mensajes y alertas
+        '/driverSales': (context) => DriverSalesScreen(), // Ruta a ventas del chofer
       },
     );
   }
