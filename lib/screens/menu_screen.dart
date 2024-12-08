@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'web_map_screen.dart'; // Importa la pantalla del mapa
 import 'inventory_screen.dart'; // Importa la pantalla del inventario
+import 'messages_alerts_screen.dart'; // Importa la pantalla de mensajes y alertas
 
 class MainInterface extends StatefulWidget {
   const MainInterface({Key? key}) : super(key: key);
@@ -10,7 +11,7 @@ class MainInterface extends StatefulWidget {
 }
 
 class _MainInterfaceState extends State<MainInterface> {
-  Widget _currentScreen = Container(); // Comienza vacío o con un widget de bienvenida
+  Widget _currentScreen = Container(); // Pantalla actual dentro del contenedor
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class _MainInterfaceState extends State<MainInterface> {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/fondo.png'),
+            image: AssetImage('assets/fondo.png'), // Fondo
             fit: BoxFit.cover,
           ),
         ),
@@ -59,7 +60,7 @@ class _MainInterfaceState extends State<MainInterface> {
                               'SEGUIR VEHÍCULO',
                               onTap: () {
                                 setState(() {
-                                  _currentScreen = WebMapScreen(); // Cambia la pantalla al mapa web
+                                  _currentScreen = WebMapScreen();
                                 });
                               },
                             ),
@@ -68,14 +69,21 @@ class _MainInterfaceState extends State<MainInterface> {
                               'REGISTRO DE\nINVENTARIO VEHICULAR',
                               onTap: () {
                                 setState(() {
-                                  _currentScreen = InventoryScreen(); // Cambia a la pantalla de inventario
+                                  _currentScreen = InventoryScreen();
                                 });
                               },
                             ),
                             _buildDivider(),
                             _buildButton('PLANIFICAR RUTAS'),
                             _buildDivider(),
-                            _buildButton('MENSAJES Y ALERTAS'),
+                            _buildButton(
+                              'MENSAJES Y ALERTAS',
+                              onTap: () {
+                                setState(() {
+                                  _currentScreen = const MessagesAlertsScreen();
+                                });
+                              },
+                            ),
                             _buildDivider(),
                             _buildButton('VER REGISTRO DE VENTAS'),
                             _buildDivider(),
@@ -118,7 +126,7 @@ class _MainInterfaceState extends State<MainInterface> {
                           child: GestureDetector(
                             onTap: () {
                               setState(() {
-                                _currentScreen = Container(); // Limpia el contenedor derecho
+                                _currentScreen = Container(); // Limpia la pantalla
                               });
                             },
                             child: Image.asset(
