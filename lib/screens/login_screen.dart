@@ -13,12 +13,12 @@ class _LoginScreenState extends State<LoginScreen> {
     String username = _usernameController.text.trim();
     String password = _passwordController.text.trim();
 
-    // Si los campos están vacíos, redirige al menú
     if (username.isEmpty || password.isEmpty) {
+      // Redirige al menú principal si los campos están vacíos
       Navigator.pushReplacementNamed(context, '/menu');
     } else if (username == 'chofer' && password == '123') {
-      // Si el usuario y la contraseña son "chofer" y "123", redirige a la pantalla de ventas
-      Navigator.pushReplacementNamed(context, '/driverSales');
+      // Redirige al menú del chofer si el usuario y contraseña son correctos
+      Navigator.pushReplacementNamed(context, '/driverMenu');
     } else {
       // Muestra un mensaje de error si las credenciales no coinciden
       ScaffoldMessenger.of(context).showSnackBar(
