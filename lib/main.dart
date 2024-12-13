@@ -9,6 +9,7 @@ import 'screens/sales_screen.dart'; // Pantalla de ventas
 import 'screens/route_screen.dart'; // Pantalla del camino a seguir
 import 'screens/chat_screen.dart'; // Pantalla del chat
 import 'screens/informe_screen.dart'; // Pantalla del informe
+import 'screens/plan_routes_screen.dart'; // Pantalla de planificación de rutas
 
 void main() {
   runApp(MyApp());
@@ -25,15 +26,16 @@ class MyApp extends StatelessWidget {
       ),
       home: LoginScreen(),
       routes: {
-        '/menu': (context) => const MainInterface(), // Ruta al menú principal
-        '/map': (context) => WebMapScreen(), // Ruta al mapa
-        '/inventory': (context) => InventoryScreen(), // Ruta al inventario
-        '/messages_alerts': (context) => const MessagesAlertsScreen(), // Ruta a mensajes y alertas
-        '/driverMenu': (context) => const DriverMenuScreen(), // Ruta al menú del chofer
-        '/sales': (context) => SalesScreen(), // Ruta a ventas del chofer
-        '/route': (context) => RouteScreen(), // Ruta al camino a seguir
-        '/chat': (context) => ChatScreen(), // Ruta al chat con administrador
-        '/informe': (context) => InformeScreen(), // Ruta al informe
+        '/menu': (context) => const MainInterface(),
+        '/map': (context) => WebMapScreen(),
+        '/inventory': (context) => InventoryScreen(),
+        '/messages_alerts': (context) => const MessagesAlertsScreen(),
+        '/driverMenu': (context) => const DriverMenuScreen(),
+        '/sales': (context) => SalesScreen(),
+        '/route': (context) => RouteScreen(),
+        '/chat': (context) => ChatScreen(),
+        '/informe': (context) => InformeScreen(),
+        '/planRoutes': (context) => PlanRoutesScreen(), // Ruta para planificación de rutas
       },
     );
   }

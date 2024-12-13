@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'web_map_screen.dart'; // Importa la pantalla del mapa
-import 'inventory_screen.dart'; // Importa la pantalla del inventario
-import 'messages_alerts_screen.dart'; // Importa la pantalla de mensajes y alertas
-import 'informe_screen.dart'; // Importa la pantalla de informe
+import 'web_map_screen.dart'; // Pantalla de mapa
+import 'inventory_screen.dart'; // Pantalla de inventario
+import 'messages_alerts_screen.dart'; // Pantalla de mensajes y alertas
+import 'informe_screen.dart'; // Pantalla del informe
+import 'plan_routes_screen.dart'; // Pantalla de planificación de rutas
 
 class MainInterface extends StatefulWidget {
   const MainInterface({Key? key}) : super(key: key);
@@ -75,7 +76,14 @@ class _MainInterfaceState extends State<MainInterface> {
                               },
                             ),
                             _buildDivider(),
-                            _buildButton('PLANIFICAR RUTAS'),
+                            _buildButton(
+                              'PLANIFICAR RUTAS',
+                              onTap: () {
+                                setState(() {
+                                  _currentScreen = PlanRoutesScreen();
+                                });
+                              },
+                            ),
                             _buildDivider(),
                             _buildButton(
                               'MENSAJES Y ALERTAS',
@@ -92,7 +100,7 @@ class _MainInterfaceState extends State<MainInterface> {
                               'INFORME',
                               onTap: () {
                                 setState(() {
-                                  _currentScreen = InformeScreen(); // Abre la pantalla de informe
+                                  _currentScreen = InformeScreen();
                                 });
                               },
                             ),
